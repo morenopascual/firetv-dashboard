@@ -3,477 +3,544 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fire TV · Atresplayer Dashboard</title>
+<title>Fire TV · Atresplayer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  :root {
-    --bg:        #0e0f11;
-    --bg2:       #16181c;
-    --bg3:       #1e2127;
-    --border:    rgba(255,255,255,0.07);
-    --border2:   rgba(255,255,255,0.13);
-    --text:      #f0f1f3;
-    --text2:     #9a9da6;
-    --text3:     #5a5d66;
-    --blue:      #378ADD;
-    --green:     #1D9E75;
-    --red:       #D85A30;
-    --purple:    #7F77DD;
-    --amber:     #E2A000;
-    --olive:     #639922;
-    --gray:      #888780;
-    --up:        #4ade80;
-    --dn:        #f87171;
-    --radius:    10px;
-    --radius-lg: 14px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+:root {
+  --bg:     #080a0d;
+  --bg2:    #0f1217;
+  --bg3:    #161b22;
+  --bg4:    #1c2230;
+  --border: rgba(255,255,255,0.06);
+  --b2:     rgba(255,255,255,0.10);
+  --text:   #e8eaf0;
+  --t2:     #7a8090;
+  --t3:     #3a3f4a;
+  --blue:   #4d9fff;
+  --blue2:  #1a4a7a;
+  --teal:   #2dd4bf;
+  --amber:  #f59e0b;
+  --rose:   #f43f5e;
+  --violet: #8b5cf6;
+  --lime:   #84cc16;
+  --up:     #34d399;
+  --dn:     #f87171;
+  --r: 8px;
+  --rl: 12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .logo {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 15px; font-weight: 600; letter-spacing: -0.02em;
-  }
-  .logo-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--blue);
-    box-shadow: 0 0 8px var(--blue);
-  }
-  .header-meta { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
+/* ── HEADER ── */
+header{
+  background:rgba(8,10,13,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:52px;position:sticky;top:0;z-index:100;
+}
+.hlogo{display:flex;align-items:center;gap:12px;}
+.hlogo-icon{
+  width:28px;height:28px;border-radius:6px;
+  background:linear-gradient(135deg,#1a4a7a,#4d9fff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;
+}
+.hlogo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.02em;}
+.hlogo-text span{color:var(--blue);}
+.hmeta{font-size:11px;color:var(--t2);letter-spacing:.04em;}
 
-  /* ── LAYOUT ── */
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+/* ── WRAP ── */
+.wrap{max-width:1080px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
 
-  /* ── SECTION HEADERS ── */
-  .sec {
-    font-size: 10px; font-weight: 500; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--text3);
-    margin: 2.5rem 0 1rem;
-    padding-bottom: .5rem;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .sec:first-child { margin-top: 0; }
-  .tag {
-    font-size: 10px; font-weight: 400; letter-spacing: 0;
-    text-transform: none;
-    background: rgba(55,138,221,.15);
-    color: var(--blue);
-    padding: 2px 8px; border-radius: 20px;
-    border: 1px solid rgba(55,138,221,.25);
-  }
-  .tag.g { background: rgba(29,158,117,.15); color: var(--green); border-color: rgba(29,158,117,.25); }
+/* ── SECTION ── */
+.sec{
+  display:flex;align-items:center;gap:10px;
+  margin:3rem 0 1.2rem;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--t2);
+}
+.sec:first-child{margin-top:0;}
+.sec::after{content:'';flex:1;height:1px;background:var(--border);}
+.stag{
+  font-family:'Inter',sans-serif;font-size:10px;font-weight:400;
+  letter-spacing:.04em;text-transform:none;
+  background:rgba(77,159,255,.12);color:var(--blue);
+  padding:2px 9px;border-radius:20px;border:1px solid rgba(77,159,255,.2);
+  white-space:nowrap;
+}
 
-  /* ── CARD ── */
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.4rem;
-    margin-bottom: 1rem;
-  }
-  .card-sm { padding: .9rem 1rem; }
+/* ── CARD ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.4rem;}
+.card+.card{margin-top:0;}
 
-  /* ── KPI STRIP ── */
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-bottom: 1rem; }
-  .kpi { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: .85rem 1rem; }
-  .kpi-label { font-size: 10px; color: var(--text3); margin-bottom: 5px; letter-spacing: .03em; }
-  .kpi-value { font-size: 22px; font-weight: 500; letter-spacing: -0.03em; color: var(--text); }
-  .kpi-sub { font-size: 10px; color: var(--text3); margin-top: 3px; }
+/* ── KPI STRIP ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin-bottom:1rem;}
+.kpi{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:.9rem 1rem;transition:border-color .2s;
+}
+.kpi:hover{border-color:var(--b2);}
+.kpi-l{font-size:10px;color:var(--t2);margin-bottom:5px;letter-spacing:.04em;}
+.kpi-v{font-size:22px;font-weight:500;font-family:'Syne',sans-serif;letter-spacing:-.03em;line-height:1.1;}
+.kpi-s{font-size:10px;color:var(--t3);margin-top:4px;}
 
-  /* ── 3-DATE KPI ── */
-  .k3-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-bottom: 1rem; }
-  .k3 { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: .85rem 1rem; }
-  .k3-label { font-size: 10px; color: var(--text3); margin-bottom: 8px; letter-spacing: .03em; }
-  .k3-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 4px; }
-  .k3-col { text-align: center; flex: 1; }
-  .k3-val { font-size: 15px; font-weight: 500; letter-spacing: -0.02em; }
-  .k3-lbl { font-size: 9px; color: var(--text3); margin-top: 2px; font-family: 'DM Mono', monospace; }
-  .k3-div { width: 1px; background: var(--border); height: 30px; flex-shrink: 0; }
-  .delta { font-size: 10px; margin-top: 3px; font-family: 'DM Mono', monospace; }
-  .up { color: var(--up); } .dn { color: var(--dn); } .fl { color: var(--text3); }
+/* ── 3-DATE KPI ── */
+.k3g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1rem;}
+.k3{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;}
+.k3-l{font-size:10px;color:var(--t2);margin-bottom:8px;letter-spacing:.04em;}
+.k3-row{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;}
+.k3-col{text-align:center;flex:1;}
+.k3-v{font-size:15px;font-weight:500;font-family:'Syne',sans-serif;letter-spacing:-.02em;}
+.k3-lb{font-size:9px;color:var(--t3);margin-top:2px;font-variant-numeric:tabular-nums;}
+.k3-div{width:1px;background:var(--border);height:28px;flex-shrink:0;}
+.dlt{font-size:10px;margin-top:3px;font-variant-numeric:tabular-nums;}
+.up{color:var(--up);}.dn{color:var(--dn);}.fl{color:var(--t3);}
 
-  /* ── FORMAT PILLS ── */
-  .fmt-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 1rem; }
-  .fmt-pill { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: .7rem .8rem; text-align: center; }
-  .fmt-name { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
-  .fmt-val { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; }
-  .fmt-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+/* ── FORMAT PILLS ── */
+.fmt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem;}
+.fmt-pill{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:.75rem .85rem;text-align:center;
+}
+.fmt-n{font-size:10px;color:var(--t2);margin-bottom:5px;letter-spacing:.03em;}
+.fmt-v{font-size:20px;font-weight:600;font-family:'Syne',sans-serif;letter-spacing:-.03em;}
+.fmt-s{font-size:10px;color:var(--t3);margin-top:3px;}
 
-  /* ── TABS ── */
-  .tabs { display: flex; gap: 6px; margin-bottom: .9rem; flex-wrap: wrap; }
-  .tab {
-    background: transparent; border: 1px solid var(--border2);
-    border-radius: 6px; padding: 5px 12px; font-size: 11px;
-    cursor: pointer; color: var(--text2); font-family: 'DM Sans', sans-serif;
-    transition: all .15s;
-  }
-  .tab:hover { border-color: var(--blue); color: var(--blue); }
-  .tab.a { background: rgba(55,138,221,.15); color: var(--blue); border-color: rgba(55,138,221,.4); }
+/* ── CATEGORY TABLE ── */
+.cat-table{width:100%;border-collapse:collapse;}
+.cat-table th{font-size:10px;color:var(--t2);font-weight:400;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--border);}
+.cat-table th:not(:first-child){text-align:right;}
+.cat-table td{font-size:12px;padding:.55rem .75rem;border-bottom:1px solid var(--border);color:var(--text);}
+.cat-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;color:var(--t2);}
+.cat-table tr:last-child td{border-bottom:none;}
+.cat-table tr:hover td{background:rgba(255,255,255,.02);}
+.cat-bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px;}
+.t-min{font-size:10px;color:var(--t2);font-weight:500;}
 
-  /* ── RANKING ── */
-  .rank-row { display: grid; grid-template-columns: 148px 1fr 70px; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 12px; }
-  .bar-track { background: rgba(255,255,255,.06); border-radius: 3px; height: 6px; overflow: hidden; }
-  .bar-fill { border-radius: 3px; height: 6px; transition: width .4s ease; }
+/* ── TOP LIST ── */
+.top-list{list-style:none;}
+.top-list li{
+  display:grid;grid-template-columns:24px 1fr auto;align-items:center;
+  gap:8px;padding:.55rem 0;border-bottom:1px solid var(--border);
+}
+.top-list li:last-child{border-bottom:none;}
+.top-n{font-size:10px;color:var(--t3);font-variant-numeric:tabular-nums;font-family:'Inter',sans-serif;}
+.top-title{font-size:12px;}
+.top-hrs{font-size:11px;color:var(--t2);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.top-pct{font-size:10px;color:var(--t3);margin-left:4px;}
 
-  /* ── TOP CONTENT LIST ── */
-  .top-list { list-style: none; }
-  .top-list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
-  .top-list li:last-child { border-bottom: none; }
-  .top-rnk { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); margin-right: 5px; }
-  .top-hrs { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text2); white-space: nowrap; }
-  .top-pct { font-size: 10px; color: var(--text3); margin-left: 5px; }
+/* ── USER TYPES ── */
+.user-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.user-pill{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;}
+.user-lbl{font-size:10px;color:var(--t2);margin-bottom:6px;letter-spacing:.04em;}
+.user-v{font-size:26px;font-weight:600;font-family:'Syne',sans-serif;letter-spacing:-.03em;}
+.user-s{font-size:10px;color:var(--t3);margin-top:4px;}
 
-  /* ── GRIDS ── */
-  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media(max-width: 620px) { .g2 { grid-template-columns: 1fr; } .fmt-grid { grid-template-columns: repeat(3,1fr); } }
+/* ── TABS ── */
+.tabs{display:flex;gap:6px;margin-bottom:.9rem;flex-wrap:wrap;}
+.tab{
+  background:transparent;border:1px solid var(--border);
+  border-radius:6px;padding:5px 13px;font-size:11px;
+  cursor:pointer;color:var(--t2);font-family:'Inter',sans-serif;
+  transition:all .15s;
+}
+.tab:hover{border-color:var(--blue);color:var(--blue);}
+.tab.a{background:rgba(77,159,255,.12);color:var(--blue);border-color:rgba(77,159,255,.3);}
 
-  /* ── INSIGHTS ── */
-  .insight { border-left: 3px solid var(--blue); background: rgba(55,138,221,.05); border-radius: 0 var(--radius) var(--radius) 0; padding: .7rem 1rem; margin-bottom: .6rem; font-size: 12px; line-height: 1.6; }
-  .insight.g { border-left-color: var(--green); background: rgba(29,158,117,.05); }
-  .insight.w { border-left-color: var(--amber); background: rgba(226,160,0,.05); }
-  .insight.r { border-left-color: var(--red); background: rgba(216,90,48,.05); }
-  .it { font-weight: 600; margin-right: 4px; }
+/* ── ENGAGEMENT TABLE ── */
+.eng-table{width:100%;border-collapse:collapse;}
+.eng-table th{font-size:10px;color:var(--t2);font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:.5rem .75rem;border-bottom:1px solid var(--border);text-align:right;}
+.eng-table th:first-child{text-align:left;}
+.eng-table td{font-size:12px;padding:.55rem .75rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;color:var(--t2);}
+.eng-table td:first-child{text-align:left;color:var(--text);}
+.eng-table tr:last-child td{border-bottom:none;}
+.eng-table tr:hover td{background:rgba(255,255,255,.02);}
+.hlt{color:var(--text)!important;font-weight:500;}
 
-  /* ── NOTE ── */
-  .note { font-size: 10px; color: var(--text3); margin-top: .5rem; font-family: 'DM Mono', monospace; line-height: 1.5; }
+/* ── INSIGHT ── */
+.insight{border-left:2px solid var(--blue);background:rgba(77,159,255,.05);border-radius:0 var(--r) var(--r) 0;padding:.75rem 1rem;margin-bottom:.6rem;font-size:12.5px;line-height:1.65;}
+.insight.g{border-left-color:var(--teal);background:rgba(45,212,191,.05);}
+.insight.w{border-left-color:var(--amber);background:rgba(245,158,11,.05);}
+.insight.r{border-left-color:var(--rose);background:rgba(244,63,94,.05);}
+.it{font-weight:600;margin-right:4px;}
 
-  /* ── LEGEND ── */
-  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 11px; color: var(--text2); }
-  .legend span { display: flex; align-items: center; gap: 5px; }
-  .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+/* ── LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;font-size:11px;color:var(--t2);}
+.legend span{display:flex;align-items:center;gap:5px;}
+.sw{width:8px;height:8px;border-radius:2px;display:inline-block;flex-shrink:0;}
 
-  /* ── CHART WRAP ── */
-  .ch { position: relative; width: 100%; }
+/* ── NOTE ── */
+.note{font-size:10px;color:var(--t3);margin-top:.5rem;line-height:1.5;}
 
-  /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr;}.fmt-grid{grid-template-columns:repeat(3,1fr);}.user-grid{grid-template-columns:1fr 1fr;}.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ── DIVIDER ── */
+.ch{position:relative;width:100%;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;font-size:11px;color:var(--t3);letter-spacing:.04em;}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <div class="logo-dot"></div>
-    Fire TV · Atresplayer
+  <div class="hlogo">
+    <div class="hlogo-icon">🔥</div>
+    <div class="hlogo-text"><span>Fire TV</span> · Atresplayer</div>
   </div>
-  <div class="header-meta">Mayo 2024 – Mayo 2026</div>
+  <div class="hmeta">Mayo 2024 – Mayo 2026</div>
 </header>
 
 <div class="wrap">
 
-<!-- ══════════════════════════════════════════
-     BLOQUE 1 · FOTO MAYO 2026
-════════════════════════════════════════════ -->
-<div class="sec">Fire TV en Atresplayer — foto mayo 2026 <span class="tag">Adobe Analytics</span></div>
+<!-- ════════════════════════════════════════
+     1. KPIs GLOBALES MAYO 2026
+════════════════════════════════════════ -->
+<div class="sec">Foto global — mayo 2026 <span class="stag">Adobe Analytics</span></div>
 
 <div class="kpi-grid">
-  <div class="kpi"><div class="kpi-label">Unique users</div><div class="kpi-value">370K</div><div class="kpi-sub">#1 Smart TV ecosystem</div></div>
-  <div class="kpi"><div class="kpi-label">Video views</div><div class="kpi-value">6.1M</div><div class="kpi-sub">54.8% directo · 38% episodio</div></div>
-  <div class="kpi"><div class="kpi-label">Horas totales</div><div class="kpi-value">2.98M h</div><div class="kpi-sub">consumo en el mes</div></div>
-  <div class="kpi"><div class="kpi-label">Horas / usuario</div><div class="kpi-value">8h 03'</div><div class="kpi-sub">tiempo mensual por UU</div></div>
-  <div class="kpi"><div class="kpi-label">Visitas / usuario</div><div class="kpi-value">6.30x</div><div class="kpi-sub">recurrencia mensual</div></div>
-  <div class="kpi"><div class="kpi-label">T. medio / play</div><div class="kpi-value">29' 26"</div><div class="kpi-sub">engagement por vídeo</div></div>
-  <div class="kpi"><div class="kpi-label">VV / visita</div><div class="kpi-value">2.88</div><div class="kpi-sub">vídeos por sesión</div></div>
-  <div class="kpi"><div class="kpi-label">Suscriptores</div><div class="kpi-value">55.7K</div><div class="kpi-sub">15.0% de conversión</div></div>
+  <div class="kpi"><div class="kpi-l">Unique users</div><div class="kpi-v" style="color:var(--blue)">370K</div><div class="kpi-s">#1 ecosistema Smart TV</div></div>
+  <div class="kpi"><div class="kpi-l">Video views</div><div class="kpi-v">6.1M</div><div class="kpi-s">en el mes</div></div>
+  <div class="kpi"><div class="kpi-l">Horas totales</div><div class="kpi-v">2.98M h</div><div class="kpi-s">consumo mensual</div></div>
+  <div class="kpi"><div class="kpi-l">Horas / usuario</div><div class="kpi-v">8h 03'</div><div class="kpi-s">tiempo mensual por UU</div></div>
+  <div class="kpi"><div class="kpi-l">Visitas / usuario</div><div class="kpi-v">6.30x</div><div class="kpi-s">recurrencia mensual</div></div>
+  <div class="kpi"><div class="kpi-l">T. medio / play</div><div class="kpi-v">29' 26"</div><div class="kpi-s">engagement por vídeo</div></div>
+  <div class="kpi"><div class="kpi-l">VV / visita</div><div class="kpi-v">2.88</div><div class="kpi-s">vídeos por sesión</div></div>
+  <div class="kpi"><div class="kpi-l">Suscriptores</div><div class="kpi-v" style="color:var(--teal)">55.7K</div><div class="kpi-s">15.0% conversión</div></div>
 </div>
 
-<div class="sec">Reparto de consumo por formato — mayo 2026</div>
+<!-- ════════════════════════════════════════
+     2. TIPOLOGÍA USUARIO
+════════════════════════════════════════ -->
+<div class="sec">Tipología de usuario <span class="stag">Adobe Analytics · abr-25/abr-26</span></div>
+
+<div class="user-grid" style="margin-bottom:1rem;">
+  <div class="user-pill">
+    <div class="user-lbl">Anónimos</div>
+    <div class="user-v" style="color:var(--t2)">69.0%</div>
+    <div class="user-s">1,156,365 UU acumulados</div>
+  </div>
+  <div class="user-pill">
+    <div class="user-lbl">Registrados</div>
+    <div class="user-v" style="color:var(--amber)">21.7%</div>
+    <div class="user-s">364,353 UU acumulados</div>
+  </div>
+  <div class="user-pill">
+    <div class="user-lbl">Suscritos</div>
+    <div class="user-v" style="color:var(--teal)">9.3%</div>
+    <div class="user-s">156,018 UU acumulados</div>
+  </div>
+</div>
+<div class="card">
+  <div class="ch" style="height:160px"><canvas id="userChart" role="img" aria-label="Evolución tipología de usuario Fire TV"></canvas></div>
+  <p class="note">Evolución mensual de usuarios anónimos, registrados y suscritos. Base: Adobe Analytics abr-25 → abr-26.</p>
+</div>
+
+<!-- ════════════════════════════════════════
+     3. REPARTO POR FORMATO
+════════════════════════════════════════ -->
+<div class="sec">Consumo por formato — mayo 2026 <span class="stag">Adobe Analytics</span></div>
 
 <div class="fmt-grid">
-  <div class="fmt-pill"><div class="fmt-name">Directo</div><div class="fmt-val" style="color:var(--green)">54.8%</div><div class="fmt-sub">3.35M VV</div></div>
-  <div class="fmt-pill"><div class="fmt-name">Episodio</div><div class="fmt-val" style="color:var(--purple)">38.0%</div><div class="fmt-sub">2.32M VV</div></div>
-  <div class="fmt-pill"><div class="fmt-name">Lineal</div><div class="fmt-val" style="color:var(--amber)">5.9%</div><div class="fmt-sub">360K VV</div></div>
-  <div class="fmt-pill"><div class="fmt-name">VOD 7D</div><div class="fmt-val" style="color:var(--red)">0.8%</div><div class="fmt-sub">50K VV</div></div>
-  <div class="fmt-pill"><div class="fmt-name">Clip</div><div class="fmt-val" style="color:var(--gray)">0.5%</div><div class="fmt-sub">30K VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">Directo</div><div class="fmt-v" style="color:var(--blue)">54.8%</div><div class="fmt-s">3.35M VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">Episodio</div><div class="fmt-v" style="color:var(--violet)">38.0%</div><div class="fmt-s">2.32M VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">Lineal</div><div class="fmt-v" style="color:var(--amber)">5.9%</div><div class="fmt-s">360K VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">VOD 7D</div><div class="fmt-v" style="color:var(--rose)">0.8%</div><div class="fmt-s">50K VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">Clip</div><div class="fmt-v" style="color:var(--t2)">0.5%</div><div class="fmt-s">30K VV</div></div>
 </div>
 
 <div class="g2">
   <div class="card">
-    <div class="legend"><span><span class="swatch" style="background:var(--green)"></span>% VV</span><span><span class="swatch" style="background:var(--blue)"></span>% Horas</span></div>
-    <div class="ch" style="height:170px"><canvas id="fmtC" role="img" aria-label="Reparto VV y horas por formato"></canvas></div>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--blue)"></span>% VV</span>
+      <span><span class="sw" style="background:var(--teal)"></span>% Horas</span>
+    </div>
+    <div class="ch" style="height:175px"><canvas id="fmtVV" role="img" aria-label="VV y horas por formato"></canvas></div>
   </div>
   <div class="card">
-    <div class="legend"><span style="font-size:11px;color:var(--text2)">T. medio visualización (h) y recurrencia (vis/UU) por formato</span></div>
-    <div class="ch" style="height:170px"><canvas id="engC" role="img" aria-label="T.medio y vis/UU por formato"></canvas></div>
+    <div style="overflow-x:auto;">
+      <table class="eng-table">
+        <thead><tr>
+          <th>Formato</th><th>T. medio</th><th>Vis/UU</th><th>VV/visita</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Directo</td><td class="hlt">8h 33'</td><td>6.01x</td><td>3.17</td></tr>
+          <tr><td>Episodio</td><td>8h 25'</td><td class="hlt">7.31x</td><td>2.28</td></tr>
+          <tr><td>Lineal</td><td>6h 03'</td><td>2.92x</td><td>2.59</td></tr>
+          <tr><td>VOD 7D</td><td>2h 01'</td><td>2.35x</td><td>2.16</td></tr>
+          <tr><td>Clip</td><td>4' 40"</td><td>1.19x</td><td>1.80</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
-<div class="sec">Top contenidos mayo 2026 — horas consumidas</div>
+<!-- ════════════════════════════════════════
+     4. DESGLOSE POR CATEGORÍA
+════════════════════════════════════════ -->
+<div class="sec">Desglose por categoría — mayo 2026 <span class="stag">Adobe Analytics</span></div>
+
 <div class="g2">
   <div class="card">
-    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px;">📺 Directo — top 5</div>
+    <div class="legend"><span><span class="sw" style="background:var(--blue)"></span>% VV</span><span><span class="sw" style="background:var(--teal)"></span>% Horas</span></div>
+    <div class="ch" style="height:230px"><canvas id="catChart" role="img" aria-label="Video views y horas por categoría de contenido"></canvas></div>
+  </div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="cat-table">
+      <thead><tr>
+        <th>Categoría</th><th>VV</th><th>% VV</th><th>Horas</th><th>T.medio/UU</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><span class="cat-bar" style="width:56px;background:var(--blue)"></span>Programas</td><td>1.97M</td><td>32.2%</td><td>1.07M h</td><td class="t-min">5h 40'</td></tr>
+        <tr><td><span class="cat-bar" style="width:54px;background:var(--violet)"></span>Series</td><td>1.89M</td><td>31.0%</td><td>1.01M h</td><td class="t-min">7h 15'</td></tr>
+        <tr><td><span class="cat-bar" style="width:30px;background:var(--teal)"></span>Noticias</td><td>1.06M</td><td>17.4%</td><td>293K h</td><td class="t-min">3h 31'</td></tr>
+        <tr><td><span class="cat-bar" style="width:23px;background:var(--amber)"></span>Telenovelas</td><td>817K</td><td>13.4%</td><td>396K h</td><td class="t-min" style="color:var(--amber);font-weight:600;">17h 46'</td></tr>
+        <tr><td><span class="cat-bar" style="width:4px;background:var(--rose)"></span>Cine</td><td>131K</td><td>2.1%</td><td>91K h</td><td class="t-min">2h 35'</td></tr>
+        <tr><td><span class="cat-bar" style="width:2px;background:var(--t3)"></span>Infantil</td><td>52K</td><td>0.9%</td><td>11K h</td><td class="t-min">1h 10'</td></tr>
+        <tr><td><span class="cat-bar" style="width:2px;background:var(--t3)"></span>Docs.</td><td>5.5K</td><td>0.1%</td><td>2.2K h</td><td class="t-min">0h 48'</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="insight w" style="margin-top:.5rem;">
+  <span class="it">Telenovelas: menor volumen, máximo tiempo.</span> Con el 13.4% de los VV acumulan 17h 46' de tiempo medio por usuario — más del doble que series (7h 15') y cuádruple que noticias (3h 31'). Son el contenido con mayor profundidad de consumo en Fire TV.
+</div>
+
+<!-- ════════════════════════════════════════
+     5. TOP CONTENIDOS
+════════════════════════════════════════ -->
+<div class="sec">Top contenidos por horas consumidas — mayo 2026 <span class="stag">Adobe Analytics</span></div>
+
+<div class="g2">
+  <div class="card">
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📺 Directo <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">1.50M h · 164 programas</span></div>
     <ul class="top-list">
-      <li><span><span class="top-rnk">01</span>Espejo Público</span><span><span class="top-hrs">82.042 h</span><span class="top-pct">5.8%</span></span></li>
-      <li><span><span class="top-rnk">02</span>La Ruleta de la Suerte</span><span><span class="top-hrs">79.802 h</span><span class="top-pct">5.7%</span></span></li>
-      <li><span><span class="top-rnk">03</span>Y ahora Sonsoles</span><span><span class="top-hrs">79.463 h</span><span class="top-pct">5.7%</span></span></li>
-      <li><span><span class="top-rnk">04</span>El Hormiguero</span><span><span class="top-hrs">63.569 h</span><span class="top-pct">4.5%</span></span></li>
-      <li><span><span class="top-rnk">05</span>A3 Noticias de la Mañana</span><span><span class="top-hrs">49.125 h</span><span class="top-pct">3.5%</span></span></li>
+      <li><span class="top-n">01</span><span class="top-title">Espejo Público</span><span><span class="top-hrs">82.042 h</span><span class="top-pct">5.8%</span></span></li>
+      <li><span class="top-n">02</span><span class="top-title">La Ruleta de la Suerte</span><span><span class="top-hrs">79.802 h</span><span class="top-pct">5.7%</span></span></li>
+      <li><span class="top-n">03</span><span class="top-title">Y ahora Sonsoles</span><span><span class="top-hrs">79.463 h</span><span class="top-pct">5.7%</span></span></li>
+      <li><span class="top-n">04</span><span class="top-title">El Hormiguero</span><span><span class="top-hrs">63.569 h</span><span class="top-pct">4.5%</span></span></li>
+      <li><span class="top-n">05</span><span class="top-title">A3 Noticias de la Mañana</span><span><span class="top-hrs">49.125 h</span><span class="top-pct">3.5%</span></span></li>
     </ul>
-    <p class="note">1.50M h totales en directo · 164 programas</p>
   </div>
   <div class="card">
-    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px;">🎬 Episodio — top 5</div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🎬 Episodio <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">1.17M h · 1.222 títulos</span></div>
     <ul class="top-list">
-      <li><span><span class="top-rnk">01</span>Sueños de libertad</span><span><span class="top-hrs">185.261 h</span><span class="top-pct">15.8%</span></span></li>
-      <li><span><span class="top-rnk">02</span>En tierra lejana</span><span><span class="top-hrs">114.311 h</span><span class="top-pct">9.8%</span></span></li>
-      <li><span><span class="top-rnk">03</span>Una nueva vida</span><span><span class="top-hrs">113.205 h</span><span class="top-pct">9.7%</span></span></li>
-      <li><span><span class="top-rnk">04</span>Emanet</span><span><span class="top-hrs">63.168 h</span><span class="top-pct">5.4%</span></span></li>
-      <li><span><span class="top-rnk">05</span>Leyla</span><span><span class="top-hrs">56.745 h</span><span class="top-pct">4.8%</span></span></li>
+      <li><span class="top-n">01</span><span class="top-title">Sueños de libertad</span><span><span class="top-hrs">185.261 h</span><span class="top-pct">15.8%</span></span></li>
+      <li><span class="top-n">02</span><span class="top-title">En tierra lejana</span><span><span class="top-hrs">114.311 h</span><span class="top-pct">9.8%</span></span></li>
+      <li><span class="top-n">03</span><span class="top-title">Una nueva vida</span><span><span class="top-hrs">113.205 h</span><span class="top-pct">9.7%</span></span></li>
+      <li><span class="top-n">04</span><span class="top-title">Emanet</span><span><span class="top-hrs">63.168 h</span><span class="top-pct">5.4%</span></span></li>
+      <li><span class="top-n">05</span><span class="top-title">Leyla</span><span><span class="top-hrs">56.745 h</span><span class="top-pct">4.8%</span></span></li>
     </ul>
-    <p class="note">1.17M h totales en episodio · 1.222 títulos</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     BLOQUE 2 · EVOLUCIÓN Y COMPARATIVAS
-════════════════════════════════════════════ -->
-<div class="sec">Evolución KPIs — mayo 2024 · mayo 2025 · mayo 2026 <span class="tag">Hiperdistribución</span></div>
-
-<div class="k3-grid">
-  <div class="k3"><div class="k3-label">Unique users</div><div class="k3-row"><div class="k3-col"><div class="k3-val">345K</div><div class="k3-lbl">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">368K</div><div class="k3-lbl">may-25</div><div class="delta up">▲ +6.7%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">370K</div><div class="k3-lbl">may-26</div><div class="delta up">▲ +0.5%</div></div></div></div>
-  <div class="k3"><div class="k3-label">Video views</div><div class="k3-row"><div class="k3-col"><div class="k3-val">7.1M</div><div class="k3-lbl">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">6.5M</div><div class="k3-lbl">may-25</div><div class="delta dn">▼ −9.5%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">6.1M</div><div class="k3-lbl">may-26</div><div class="delta dn">▼ −5.3%</div></div></div></div>
-  <div class="k3"><div class="k3-label">Suscriptores</div><div class="k3-row"><div class="k3-col"><div class="k3-val">53.8K</div><div class="k3-lbl">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">57.4K</div><div class="k3-lbl">may-25</div><div class="delta up">▲ +6.7%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">55.7K</div><div class="k3-lbl">may-26</div><div class="delta dn">▼ −2.9%</div></div></div></div>
-  <div class="k3"><div class="k3-label">Conversión a suscripción</div><div class="k3-row"><div class="k3-col"><div class="k3-val">15.6%</div><div class="k3-lbl">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">15.6%</div><div class="k3-lbl">may-25</div><div class="delta fl">— igual</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">15.0%</div><div class="k3-lbl">may-26</div><div class="delta dn">▼ −0.6pp</div></div></div></div>
-  <div class="k3"><div class="k3-label">Horas totales / mes</div><div class="k3-row"><div class="k3-col"><div class="k3-val">—</div><div class="k3-lbl">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">3.25M h</div><div class="k3-lbl">may-25</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-val">2.98M h</div><div class="k3-lbl">may-26</div><div class="delta dn">▼ −8.2%</div></div></div></div>
+<div class="g2" style="margin-top:1rem;">
+  <div class="card">
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📡 Lineal <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">288K h · 265 títulos</span></div>
+    <ul class="top-list">
+      <li><span class="top-n">01</span><span class="top-title">Aquí no hay quien viva</span><span><span class="top-hrs">138.928 h</span><span class="top-pct">48.2%</span></span></li>
+      <li><span class="top-n">02</span><span class="top-title">Equipo de Investigación</span><span><span class="top-hrs">52.366 h</span><span class="top-pct">18.2%</span></span></li>
+      <li><span class="top-n">03</span><span class="top-title">El Club de la Comedia</span><span><span class="top-hrs">18.215 h</span><span class="top-pct">6.3%</span></span></li>
+      <li><span class="top-n">04</span><span class="top-title">El Hormiguero</span><span><span class="top-hrs">13.371 h</span><span class="top-pct">4.6%</span></span></li>
+      <li><span class="top-n">05</span><span class="top-title">Física o química</span><span><span class="top-hrs">13.122 h</span><span class="top-pct">4.5%</span></span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🕐 VOD 7 días <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">19.7K h · 184 títulos</span></div>
+    <ul class="top-list">
+      <li><span class="top-n">01</span><span class="top-title">The Big Bang Theory</span><span><span class="top-hrs">1.809 h</span><span class="top-pct">9.2%</span></span></li>
+      <li><span class="top-n">02</span><span class="top-title">En tierra lejana</span><span><span class="top-hrs">1.468 h</span><span class="top-pct">7.4%</span></span></li>
+      <li><span class="top-n">03</span><span class="top-title">Los Simpson</span><span><span class="top-hrs">1.227 h</span><span class="top-pct">6.2%</span></span></li>
+      <li><span class="top-n">04</span><span class="top-title">Friends</span><span><span class="top-hrs">1.093 h</span><span class="top-pct">5.5%</span></span></li>
+    </ul>
+  </div>
 </div>
 
-<div class="sec">Serie histórica Fire TV — 25 meses <span class="tag">Hiperdistribución</span></div>
+<!-- ════════════════════════════════════════
+     6. EVOLUCIÓN ANUAL
+════════════════════════════════════════ -->
+<div class="sec">Evolución may-24 · may-25 · may-26 <span class="stag">Hiperdistribución</span></div>
+
+<div class="k3g">
+  <div class="k3"><div class="k3-l">Unique users</div><div class="k3-row"><div class="k3-col"><div class="k3-v">345K</div><div class="k3-lb">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">368K</div><div class="k3-lb">may-25</div><div class="dlt up">▲ +6.7%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">370K</div><div class="k3-lb">may-26</div><div class="dlt up">▲ +0.5%</div></div></div></div>
+  <div class="k3"><div class="k3-l">Video views</div><div class="k3-row"><div class="k3-col"><div class="k3-v">7.1M</div><div class="k3-lb">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">6.5M</div><div class="k3-lb">may-25</div><div class="dlt dn">▼ −9.5%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">6.1M</div><div class="k3-lb">may-26</div><div class="dlt dn">▼ −5.3%</div></div></div></div>
+  <div class="k3"><div class="k3-l">Suscriptores</div><div class="k3-row"><div class="k3-col"><div class="k3-v">53.8K</div><div class="k3-lb">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">57.4K</div><div class="k3-lb">may-25</div><div class="dlt up">▲ +6.7%</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">55.7K</div><div class="k3-lb">may-26</div><div class="dlt dn">▼ −2.9%</div></div></div></div>
+  <div class="k3"><div class="k3-l">Conversión</div><div class="k3-row"><div class="k3-col"><div class="k3-v">15.6%</div><div class="k3-lb">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">15.6%</div><div class="k3-lb">may-25</div><div class="dlt fl">— igual</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">15.0%</div><div class="k3-lb">may-26</div><div class="dlt dn">▼ −0.6pp</div></div></div></div>
+  <div class="k3"><div class="k3-l">Horas totales / mes</div><div class="k3-row"><div class="k3-col"><div class="k3-v">—</div><div class="k3-lb">may-24</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">3.25M h</div><div class="k3-lb">may-25</div></div><div class="k3-div"></div><div class="k3-col"><div class="k3-v">2.98M h</div><div class="k3-lb">may-26</div><div class="dlt dn">▼ −8.2%</div></div></div></div>
+</div>
+
+<!-- ════════════════════════════════════════
+     7. SERIE HISTÓRICA 25 MESES
+════════════════════════════════════════ -->
+<div class="sec">Serie histórica — 25 meses <span class="stag">Hiperdistribución</span></div>
+
 <div class="tabs" id="tr1">
   <button class="tab a" onclick="sw1('uu')">Unique users</button>
   <button class="tab" onclick="sw1('vv')">Video views</button>
   <button class="tab" onclick="sw1('su')">Suscriptores</button>
   <button class="tab" onclick="sw1('cv')">Conversión %</button>
-  <button class="tab" onclick="sw1('ht')">Horas totales</button>
+  <button class="tab" onclick="sw1('vi')">Visitas / UU</button>
 </div>
 <div class="card">
-  <div class="ch" style="height:230px"><canvas id="ec" role="img" aria-label="Evolución mensual Fire TV 25 meses"></canvas></div>
-  <p class="note">23 meses datos reales · 2 interpolados (sep-25*, ene-26*) en opacidad reducida · Horas desde abr-25</p>
-</div>
-
-<div class="sec">Horas de consumo Fire TV — abr-25 → may-26</div>
-<div class="card">
-  <div class="ch" style="height:190px"><canvas id="htc" role="img" aria-label="Horas totales de consumo mensual Fire TV"></canvas></div>
-  <p class="note">Pico may-25: 3.25M h. May-26: 2.98M h (−8.2%). Interpolados: sep-25*, ene-26*.</p>
+  <div class="ch" style="height:240px"><canvas id="evoC" role="img" aria-label="Evolución mensual Fire TV 25 meses"></canvas></div>
+  <p class="note">25 meses · 2 interpolados (sep-25*, ene-26*) en opacidad reducida</p>
 </div>
 
-<div class="sec">Ecosistema Smart TV — unique users (25 meses) <span class="tag">Hiperdistribución</span></div>
-<div class="card">
-  <div class="legend">
-    <span><span class="swatch" style="background:var(--blue)"></span>Fire TV</span>
-    <span><span class="swatch" style="background:var(--green)"></span>Samsung</span>
-    <span><span class="swatch" style="background:var(--red)"></span>LG</span>
-    <span><span class="swatch" style="background:var(--purple)"></span>Xiaomi</span>
-    <span><span class="swatch" style="background:var(--amber)"></span>Hisense</span>
-    <span><span class="swatch" style="background:var(--olive)"></span>Est. Google TV</span>
+<!-- ════════════════════════════════════════
+     8. HORAS DE CONSUMO (Adobe Analytics)
+════════════════════════════════════════ -->
+<div class="sec">Horas de consumo — abr-25 → may-26 <span class="stag">Adobe Analytics</span></div>
+
+<div class="g2">
+  <div class="card">
+    <div class="legend"><span><span class="sw" style="background:var(--blue)"></span>Horas totales mensuales</span></div>
+    <div class="ch" style="height:195px"><canvas id="htC" role="img" aria-label="Horas totales de consumo mensual Fire TV"></canvas></div>
+    <p class="note">Pico may-25: 3.25M h. Mínimo: ago-25 con 2.73M h.</p>
   </div>
-  <div class="ch" style="height:250px"><canvas id="cc" role="img" aria-label="Comparativa unique users ecosistema Smart TV 25 meses"></canvas></div>
-  <p class="note">Est. Google TV = Android TV + TCL + TDS + Google + 70% Sony + 50% Philips.</p>
-</div>
-
-<div class="sec">Share de unique users en Hiperdistribución</div>
-<div class="card">
-  <div class="legend">
-    <span><span class="swatch" style="background:var(--blue)"></span>Fire TV</span>
-    <span><span class="swatch" style="background:var(--green)"></span>Samsung</span>
-    <span><span class="swatch" style="background:var(--red)"></span>LG</span>
-    <span><span class="swatch" style="background:var(--purple)"></span>Xiaomi</span>
-    <span><span class="swatch" style="background:var(--amber)"></span>Hisense</span>
-    <span><span class="swatch" style="background:var(--olive)"></span>Est. Google TV</span>
+  <div class="card">
+    <div class="legend"><span><span class="sw" style="background:var(--rose)"></span>Horas / usuario</span></div>
+    <div class="ch" style="height:195px"><canvas id="huC" role="img" aria-label="Horas de consumo por usuario Fire TV"></canvas></div>
+    <p class="note">Pico oct-25: 10h 26'/UU. Caída hasta 6h 58' en abr-26.</p>
   </div>
-  <div class="ch" style="height:230px"><canvas id="sc" role="img" aria-label="Share mensual de unique users por ecosistema"></canvas></div>
-  <p class="note">Denominador: suma de todos los ecosistemas Smart TV en Hiperdistribución.</p>
 </div>
 
-<div class="sec">Posición relativa — promedio feb–may 2026 <span class="tag">Hiperdistribución</span></div>
-<div class="tabs" id="tr2">
-  <button class="tab a" onclick="sw2('uu')">Unique users</button>
-  <button class="tab" onclick="sw2('vv')">Video views</button>
-  <button class="tab" onclick="sw2('su')">Suscriptores</button>
-  <button class="tab" onclick="sw2('cv')">Conversión</button>
-  <button class="tab" onclick="sw2('vi')">Visitas/UU</button>
-</div>
-<div class="card">
-  <div id="rc"></div>
-  <p class="note">Promedio feb–may 2026 para suavizar estacionalidad puntual.</p>
-</div>
+<!-- ════════════════════════════════════════
+     9. LECTURAS
+════════════════════════════════════════ -->
+<div class="sec">Lecturas clave del periodo</div>
 
-<div class="sec">Lecturas principales</div>
-<div class="insight g"><span class="it">Liderazgo estructural.</span> Fire TV #1 en UU y VV en los 25 meses sin excepción. Gap sobre Samsung: +54% en UU (promedio feb–may 26).</div>
-<div class="insight"><span class="it">Est. Google TV: ecosistema relevante.</span> Al agregar Android TV + TCL + TDS + Google + Sony parcial + Philips parcial, el conjunto ronda los 202K UU de media feb–may 26, cifra cercana a Samsung (244K).</div>
-<div class="insight"><span class="it">Consumo concentrado.</span> Directo (54.8%) y episodio (38%) acumulan el 92.8% de los VV. El episodio tiene mayor recurrencia (7.31x) que el directo (6.01x).</div>
-<div class="insight g"><span class="it">Telenovelas, motor del episodio.</span> Sueños de libertad acapara el 15.8% de las horas en episodio. Los tres primeros títulos son telenovelas y suman el 35.3%.</div>
-<div class="insight r"><span class="it">VV y horas a la baja.</span> −14% en VV y −8.2% en horas totales desde may-25 a may-26.</div>
-<div class="insight w"><span class="it">Conversión sin palanca.</span> 15% estable durante 25 meses, frente al 33–34% de Samsung y LG. Brecha de +18pp sin cerrar.</div>
-<div class="insight w"><span class="it">Hisense en ascenso.</span> De 51K UU (may-24) a 98K (may-26), casi ×2 en dos años. Podría superar a Xiaomi antes de fin de 2026.</div>
+<div class="insight g"><span class="it">Base de usuarios estable y madura.</span> Fire TV oscila en banda 296K–403K UU sin tendencia alcista sostenida. El crecimiento may-24 a may-26 es solo +7%, señal de un ecosistema instalado que no crece en penetración de app pero tampoco cae.</div>
+<div class="insight"><span class="it">Directo y episodio concentran el 92.8% del consumo.</span> Directo lidera en volumen (54.8% VV) pero el episodio tiene más recurrencia (7.31x vs 6.01x visitas/UU). En horas el lineal pesa más (9.7%) de lo que su cuota de VV sugiere (5.9%).</div>
+<div class="insight w"><span class="it">Telenovelas: palanca de engagement sin explotar.</span> Con 17h 46' de tiempo medio por usuario son, de lejos, el contenido de mayor profundidad de consumo. Sueños de libertad solo acapara el 15.8% de todas las horas en episodio.</div>
+<div class="insight r"><span class="it">VV y horas a la baja.</span> −14% en VV desde may-24. Las horas totales cayeron de 3.25M (may-25) a 2.98M (may-26), −8.2%. El pico de horas/UU fue oct-25 (10h 26') y no se ha recuperado.</div>
+<div class="insight w"><span class="it">Conversión estancada.</span> La tasa de suscripción lleva 25 meses en el rango 13.9%–18.7%, sin tendencia de mejora estructural. El 69% del parque Fire TV sigue siendo anónimo — la mayor bolsa de potencial de activación.</div>
+<div class="insight g"><span class="it">Engagement por sesión sólido.</span> 29'26" de tiempo medio por play y 2.88 VV por visita se mantienen estables en toda la serie. El usuario que llega a Fire TV tiene alta intención de consumo.</div>
 
 </div><!-- /wrap -->
 
-<footer>Atresplayer · Market Intelligence · Datos: Adobe Analytics + Hiperdistribución · Mayo 2024 – Mayo 2026</footer>
+<footer>Atresplayer · Market Intelligence · Adobe Analytics + Hiperdistribución · Mayo 2024 – Mayo 2026</footer>
 
 <script>
-const TC={color:'#5a5d66',font:{size:10,family:'DM Mono'}};
-const GC={color:'rgba(255,255,255,0.05)'};
+const TC={color:'#3a3f4a',font:{size:10,family:'Inter, sans-serif'}};
+const GC={color:'rgba(255,255,255,0.04)'};
 const TCR={...TC,maxRotation:45,autoSkip:false};
+const IS=[16,20];
 
-// Format charts
+// ── USER TIPOLOGÍA chart (monthly stacked area)
+const UML=['Abr-25','May-25','Jun-25','Jul-25','Ago-25','Sep-25','Oct-25','Nov-25','Dic-25','Ene-26','Feb-26','Mar-26','Abr-26'];
+const UANON= [237519,249038,228148,202803,196161,197940,193208,202218,247621,244088,234116,261600,270613];
+const UREG=  [93186, 91698, 85571, 75705, 73001, 73789, 70340, 73929, 90263, 88098, 84424, 94912, 97938];
+const USUB=  [30689, 27644, 30670, 28274, 27048, 28618, 25850, 28644, 29089, 28542, 26894, 28678, 33978];
+new Chart(document.getElementById('userChart'),{type:'bar',
+  data:{labels:UML,datasets:[
+    {label:'Anónimos',data:UANON,backgroundColor:'#4d9fff22',borderColor:'#4d9fff',borderWidth:1.5,stack:'s',borderRadius:0},
+    {label:'Registrados',data:UREG,backgroundColor:'#f59e0b22',borderColor:'#f59e0b',borderWidth:1.5,stack:'s',borderRadius:0},
+    {label:'Suscritos',data:USUB,backgroundColor:'#2dd4bf44',borderColor:'#2dd4bf',borderWidth:1.5,stack:'s',borderRadius:0},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{...TC,maxRotation:45},grid:{display:false}},
+            y:{ticks:{callback:v=>v>=1e3?(v/1e3).toFixed(0)+'K':v,...TC},grid:GC,stacked:true}}}
+});
+
+// ── FORMAT VV vs Horas
 const FMT=['Directo','Episodio','Lineal','VOD 7D','Clip'];
-const FC=['#1D9E75','#7F77DD','#E2A000','#D85A30','#888780'];
-new Chart(document.getElementById('fmtC'),{type:'bar',
+const FCOLOR=['#4d9fff','#8b5cf6','#f59e0b','#f43f5e','#4a5060'];
+new Chart(document.getElementById('fmtVV'),{type:'bar',
   data:{labels:FMT,datasets:[
-    {label:'% VV',data:[54.8,38.0,5.9,0.8,0.5],backgroundColor:FC.map(c=>c+'44'),borderColor:FC,borderWidth:1.5,borderRadius:4},
-    {label:'% Horas',data:[50.3,39.3,9.7,0.7,0.0],backgroundColor:'#378ADD22',borderColor:'#378ADD',borderWidth:1.5,borderRadius:4},
+    {label:'% VV',data:[54.8,38.0,5.9,0.8,0.5],backgroundColor:FCOLOR.map(c=>c+'33'),borderColor:FCOLOR,borderWidth:1.5,borderRadius:4},
+    {label:'% Horas',data:[50.3,39.3,9.7,0.7,0.0],backgroundColor:'#2dd4bf22',borderColor:'#2dd4bf',borderWidth:1.5,borderRadius:4},
   ]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
     scales:{y:{ticks:{callback:v=>v+'%',...TC},grid:GC},x:{ticks:TC,grid:{display:false}}}}
 });
-new Chart(document.getElementById('engC'),{type:'bar',
-  data:{labels:FMT,datasets:[
-    {label:'T.medio (h)',data:[8.55,8.42,6.04,2.01,0.08],backgroundColor:FC.map(c=>c+'44'),borderColor:FC,borderWidth:1.5,borderRadius:4,yAxisID:'y'},
-    {label:'Vis/UU',data:[6.01,7.31,2.92,2.35,1.19],type:'line',borderColor:'#378ADD',backgroundColor:'transparent',pointBackgroundColor:'#378ADD',pointRadius:5,borderWidth:2,yAxisID:'y2'},
+
+// ── CATEGORY CHART
+const CATS=['Programas','Series','Noticias','Telenovelas','Cine','Infantil'];
+const CATC=['#4d9fff','#8b5cf6','#2dd4bf','#f59e0b','#f43f5e','#84cc16'];
+new Chart(document.getElementById('catChart'),{type:'bar',
+  data:{labels:CATS,datasets:[
+    {label:'% VV',data:[32.2,31.0,17.4,13.4,2.1,0.9],backgroundColor:CATC.map(c=>c+'33'),borderColor:CATC,borderWidth:1.5,borderRadius:4},
+    {label:'% Horas',data:[36.1,33.8,9.8,13.3,3.1,0.4],backgroundColor:'rgba(255,255,255,0.05)',borderColor:'rgba(255,255,255,0.25)',borderWidth:1,borderRadius:4,borderDash:[3,3]},
   ]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{
-      y:{ticks:{callback:v=>v+'h',...TC},grid:GC},
-      y2:{position:'right',ticks:{callback:v=>v+'x',...TC},grid:{display:false}}
-    }}
+    scales:{y:{ticks:{callback:v=>v+'%',...TC},grid:GC},x:{ticks:{...TC,maxRotation:30},grid:{display:false}}}}
 });
 
-// Historical data
-const ML=['May-24','Jun-24','Jul-24','Aug-24','Sep-24','Oct-24','Nov-24','Dec-24','Jan-25','Feb-25','Mar-25','Apr-25','May-25','Jun-25','Jul-25','Aug-25','Sep-25*','Oct-25','Nov-25','Dec-25','Jan-26*','Feb-26','Mar-26','Apr-26','May-26'];
-const IS=[16,20];
+// ── HISTORICAL SERIES
+const ML=['May-24','Jun-24','Jul-24','Ago-24','Sep-24','Oct-24','Nov-24','Dic-24','Ene-25','Feb-25','Mar-25','Abr-25','May-25','Jun-25','Jul-25','Ago-25','Sep-25*','Oct-25','Nov-25','Dic-25','Ene-26*','Feb-26','Mar-26','Abr-26','May-26'];
 const AM={
   uu:[345282,339332,342494,327190,346661,376962,359867,365577,381877,347346,375985,361394,368386,344389,306782,296210,299295,289398,304791,366973,350597,345434,385193,402529,370348],
   vv:[7128904,6458584,6420263,6051203,6130909,6694166,8322058,7682123,7536253,6857938,7270084,6236022,6451841,5951284,5804803,5574483,5880053,6213613,5927313,5879489,5950271,5706216,6288069,5840777,6108001],
   su:[53797,53719,53994,50844,52342,55756,55750,55120,53925,52767,56420,56641,57429,55794,54250,50904,53484,53997,54787,59644,55177,52430,53848,56008,55709],
   cv:[15.6,15.8,15.8,15.5,15.1,14.8,15.5,15.1,14.1,15.2,15.0,15.7,15.6,16.2,17.7,17.2,17.9,18.7,18.0,16.3,15.7,15.2,14.0,13.9,15.0],
-  ht:[null,null,null,null,null,null,null,null,null,null,null,3144745,3246192,2985303,2900392,2734116,2919476,3020191,2904059,2820822,3016364,2759191,3034037,2811297,2980853],
+  vi:[7.73,7.35,7.10,6.73,6.78,6.95,6.99,6.21,6.42,6.67,6.72,6.26,6.47,6.46,6.80,6.42,6.92,7.45,7.01,6.09,6.38,6.20,6.23,5.69,6.30],
 };
-const SA=[269588,264398,236202,200750,256579,281513,273054,209249,228098,231042,236575,221059,228674,225843,214893,180333,195000,205973,228974,252901,246000,238422,249452,240860,247967];
-const LG=[192952,192193,173965,144792,180047,198028,195421,150507,166333,168008,177737,163851,165259,163322,157544,133919,151000,152398,169323,181233,181500,181562,189569,184921,188953];
-const XI=[103836,107316,104166,92288,106214,122083,145392,112880,126615,117639,122730,118755,121996,111865,105684,94246,101580,108915,122050,129587,125000,119577,123413,119685,123196];
-const HI=[50676,54280,54974,51513,65084,71333,76262,79739,85626,80388,88558,83925,86930,87449,91917,90016,90860,91705,101647,108476,104200,99961,101008,95884,98111];
-const GTV=[178206,206205,197379,157336,174759,208943,189404,181714,213842,192555,202212,193706,204389,180734,176013,150852,null,176791,206137,216857,null,196598,203441,198406,208476];
-const VO=[87245,86078,80386,65234,73468,83527,70871,50828,53612,65579,77412,65328,68968,62466,61395,53380,57000,63656,72925,82266,78000,73697,65803,60969,61452];
-const MO=[30968,31512,29547,24085,27897,32096,30727,30256,31496,29190,32994,18,2,25614,29940,27510,28000,29592,31530,39821,36000,32777,36331,34651,33687];
-const TOT=ML.map((_,i)=>AM.uu[i]+SA[i]+LG[i]+XI[i]+HI[i]+(GTV[i]||0)+VO[i]+MO[i]);
-
-const AVG={
-  dev:['Fire TV','Samsung','LG','Est. Google TV','Xiaomi','Hisense','Vodafone','Movistar','Sony','Apple TV'],
-  uu: [375876,244175,186251,201730,121468,98741,65480,34362,23631,12819],
-  vv: [5985766,4779578,3573320,3746249,2323034,1091797,543305,523372,362375,198680],
-  su: [54499,79742,62704,44436,24380,12941,12147,15079,6342,2709],
-  cv: [14.5,32.6,33.7,22.0,20.1,13.1,18.6,43.9,26.8,21.1],
-  vi: [6.11,8.98,8.54,7.20,7.16,5.15,4.28,6.79,7.60,7.13],
-};
-const COL={'Fire TV':'#378ADD','Samsung':'#1D9E75','LG':'#D85A30','Xiaomi':'#7F77DD','Hisense':'#E2A000','Est. Google TV':'#639922','Vodafone':'#888780','Movistar':'#3266ad','Sony':'#AFA9EC','Apple TV':'#9FE1CB'};
 
 function fv(v,m){
+  if(v==null) return null;
+  if(m==='cv') return v;
+  if(m==='vi') return v;
+  return v;
+}
+function fmt(v,m){
   if(v==null) return '—';
   if(m==='cv') return v.toFixed(1)+'%';
   if(m==='vi') return v.toFixed(2)+'x';
-  if(m==='ht') return (v/1e6).toFixed(2)+'M h';
   if(v>=1e6) return (v/1e6).toFixed(2)+'M';
   if(v>=1e3) return (v/1e3).toFixed(0)+'K';
   return String(Math.round(v));
 }
 
-let evoC;
+const COLS_EVO={uu:'#4d9fff',vv:'#2dd4bf',su:'#8b5cf6',cv:'#f59e0b',vi:'#f43f5e'};
+let evoChart;
 function buildEvo(m){
-  if(evoC) evoC.destroy();
-  const data=AM[m];
-  const cols={uu:'#378ADD',vv:'#1D9E75',su:'#7F77DD',cv:'#BA7517',ht:'#378ADD'};
-  const col=cols[m];
-  evoC=new Chart(document.getElementById('ec'),{type:'bar',
-    data:{labels:ML,datasets:[{data,
-      backgroundColor:ML.map((_,i)=>data[i]==null?'transparent':IS.includes(i)?col+'44':col+'33'),
-      borderColor:ML.map((_,i)=>data[i]==null?'transparent':IS.includes(i)?col+'77':col),
-      borderWidth:2,borderRadius:4}]},
+  if(evoChart) evoChart.destroy();
+  const d=AM[m]; const col=COLS_EVO[m];
+  evoChart=new Chart(document.getElementById('evoC'),{type:'bar',
+    data:{labels:ML,datasets:[{data:d,
+      backgroundColor:ML.map((_,i)=>d[i]==null?'transparent':IS.includes(i)?col+'33':col+'25'),
+      borderColor:ML.map((_,i)=>d[i]==null?'transparent':IS.includes(i)?col+'66':col),
+      borderWidth:1.5,borderRadius:3}]},
     options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw!=null?' '+fv(c.raw,m)+(IS.includes(c.dataIndex)?' (interpolado)':''):' sin dato'}}},
-      scales:{y:{ticks:{callback:v=>fv(v,m),...TC},grid:GC},x:{ticks:TCR,grid:{display:false}}}}});
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw!=null?' '+fmt(c.raw,m)+(IS.includes(c.dataIndex)?' (interpolado)':''):' sin dato'}}},
+      scales:{y:{ticks:{callback:v=>fmt(v,m),...TC},grid:GC},x:{ticks:TCR,grid:{display:false}}}}});
 }
 function sw1(m){
-  document.querySelectorAll('#tr1 .tab').forEach((t,i)=>t.classList.toggle('a',['uu','vv','su','cv','ht'][i]===m));
+  document.querySelectorAll('#tr1 .tab').forEach((t,i)=>t.classList.toggle('a',['uu','vv','su','cv','vi'][i]===m));
   buildEvo(m);
 }
 
-// Hours total chart
-const HML=['Abr-25','May-25','Jun-25','Jul-25','Ago-25','Sep-25*','Oct-25','Nov-25','Dic-25','Ene-26*','Feb-26','Mar-26','Abr-26','May-26'];
+// ── HOURS CHARTS
+const HML=['Abr-25','May-25','Jun-25','Jul-25','Ago-25','Sep-25','Oct-25','Nov-25','Dic-25','Ene-26','Feb-26','Mar-26','Abr-26','May-26'];
 const HHT=[3144745,3246192,2985303,2900392,2734116,2919476,3020191,2904059,2820822,3016364,2759191,3034037,2811297,2980853];
-new Chart(document.getElementById('htc'),{type:'bar',
+const HHU=[8.70,8.81,8.67,9.45,9.23,9.72,10.44,9.53,7.69,8.36,7.99,7.88,6.98,8.05];
+
+new Chart(document.getElementById('htC'),{type:'bar',
   data:{labels:HML,datasets:[{data:HHT,
-    backgroundColor:HML.map(l=>l.includes('*')?'#378ADD44':'#378ADD33'),
-    borderColor:HML.map(l=>l.includes('*')?'#378ADD88':'#378ADD'),borderWidth:1.5,borderRadius:4}]},
+    backgroundColor:'#4d9fff22',borderColor:'#4d9fff',borderWidth:1.5,borderRadius:3}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{y:{ticks:{callback:v=>(v/1e6).toFixed(2)+'M',...TC},grid:GC},x:{ticks:{...TC,maxRotation:45},grid:{display:false}}}}});
+    scales:{y:{ticks:{callback:v=>(v/1e6).toFixed(2)+'M',...TC},grid:GC},x:{ticks:{...TC,maxRotation:45},grid:{display:false}}}}
+});
 
-// Comparativa
-new Chart(document.getElementById('cc'),{type:'line',
-  data:{labels:ML,datasets:[
-    {data:AM.uu,borderColor:'#378ADD',fill:false,tension:0.3,pointRadius:3,borderWidth:2.5,pointBackgroundColor:'#378ADD'},
-    {data:SA,borderColor:'#1D9E75',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#1D9E75'},
-    {data:LG,borderColor:'#D85A30',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#D85A30'},
-    {data:XI,borderColor:'#7F77DD',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#7F77DD'},
-    {data:HI,borderColor:'#E2A000',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#E2A000'},
-    {data:GTV,borderColor:'#639922',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#639922',spanGaps:false},
-  ]},
+new Chart(document.getElementById('huC'),{type:'line',
+  data:{labels:HML,datasets:[{data:HHU,
+    borderColor:'#f43f5e',backgroundColor:'#f43f5e0a',fill:true,
+    tension:0.35,pointRadius:4,pointBackgroundColor:'#f43f5e',
+    pointHoverRadius:6,borderWidth:2}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{y:{ticks:{callback:v=>v>=1e3?(v/1e3).toFixed(0)+'K':v,...TC},grid:GC},x:{ticks:TCR,grid:{display:false}}}}});
-
-// Share
-new Chart(document.getElementById('sc'),{type:'line',
-  data:{labels:ML,datasets:[
-    {data:AM.uu.map((v,i)=>+(v/TOT[i]*100).toFixed(1)),borderColor:'#378ADD',fill:false,tension:0.3,pointRadius:2,borderWidth:2.5},
-    {data:SA.map((v,i)=>+(v/TOT[i]*100).toFixed(1)),borderColor:'#1D9E75',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3]},
-    {data:LG.map((v,i)=>+(v/TOT[i]*100).toFixed(1)),borderColor:'#D85A30',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3]},
-    {data:XI.map((v,i)=>+(v/TOT[i]*100).toFixed(1)),borderColor:'#7F77DD',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3]},
-    {data:HI.map((v,i)=>+(v/TOT[i]*100).toFixed(1)),borderColor:'#E2A000',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3]},
-    {data:GTV.map((v,i)=>v!=null?+(v/TOT[i]*100).toFixed(1):null),borderColor:'#639922',fill:false,tension:0.3,pointRadius:2,borderWidth:1.5,borderDash:[5,3],spanGaps:false},
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{y:{ticks:{callback:v=>v+'%',...TC},grid:GC},x:{ticks:TCR,grid:{display:false}}}}});
-
-// Ranking
-function buildRank(m){
-  const data=AVG[m];
-  const max=Math.max(...data);
-  const sorted=AVG.dev.map((d,i)=>({d,v:data[i]})).sort((a,b)=>b.v-a.v);
-  document.getElementById('rc').innerHTML=sorted.map(({d,v})=>`
-    <div class="rank-row">
-      <span style="font-weight:${d==='Fire TV'?'600':'400'};color:${d==='Fire TV'?'#f0f1f3':'#9a9da6'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${d}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${(v/max*100).toFixed(1)}%;background:${COL[d]||'#888780'};"></div></div>
-      <span style="text-align:right;font-family:'DM Mono',monospace;color:${d==='Fire TV'?'#378ADD':'#5a5d66'};font-size:11px;">${fv(v,m)}</span>
-    </div>`).join('');
-}
-function sw2(m){
-  document.querySelectorAll('#tr2 .tab').forEach((t,i)=>t.classList.toggle('a',['uu','vv','su','cv','vi'][i]===m));
-  buildRank(m);
-}
+    scales:{y:{min:6,max:11,ticks:{callback:v=>v.toFixed(0)+"h",...TC},grid:GC},x:{ticks:{...TC,maxRotation:45},grid:{display:false}}}}
+});
 
 buildEvo('uu');
-buildRank('uu');
 </script>
 </body>
 </html>
