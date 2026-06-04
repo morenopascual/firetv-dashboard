@@ -16,8 +16,8 @@
   --border: rgba(255,255,255,0.06);
   --b2:     rgba(255,255,255,0.10);
   --text:   #e8eaf0;
-  --t2:     #7a8090;
-  --t3:     #3a3f4a;
+  --t2:     #b0b5c0;
+  --t3:     #8a8f9a;
   --blue:   #4d9fff;
   --blue2:  #1a4a7a;
   --teal:   #2dd4bf;
@@ -52,7 +52,7 @@ header{
 }
 .hlogo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.02em;}
 .hlogo-text span{color:var(--blue);}
-.hmeta{font-size:11px;color:var(--t2);letter-spacing:.04em;}
+.hmeta{font-size:11px;color:var(--text);letter-spacing:.04em;}
 
 /* ── WRAP ── */
 .wrap{max-width:1080px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
@@ -62,7 +62,7 @@ header{
   display:flex;align-items:center;gap:10px;
   margin:3rem 0 1.2rem;
   font-family:'Syne',sans-serif;font-size:11px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--t2);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text);
 }
 .sec:first-child{margin-top:0;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -85,21 +85,21 @@ header{
   padding:.9rem 1rem;transition:border-color .2s;
 }
 .kpi:hover{border-color:var(--b2);}
-.kpi-l{font-size:10px;color:var(--t2);margin-bottom:5px;letter-spacing:.04em;}
+.kpi-l{font-size:10px;color:var(--text);margin-bottom:5px;letter-spacing:.04em;}
 .kpi-v{font-size:22px;font-weight:500;font-family:'Syne',sans-serif;letter-spacing:-.03em;line-height:1.1;}
-.kpi-s{font-size:10px;color:var(--t3);margin-top:4px;}
+.kpi-s{font-size:10px;color:var(--t2);margin-top:4px;}
 
 /* ── 3-DATE KPI ── */
 .k3g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1rem;}
 .k3{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;}
-.k3-l{font-size:10px;color:var(--t2);margin-bottom:8px;letter-spacing:.04em;}
+.k3-l{font-size:10px;color:var(--text);margin-bottom:8px;letter-spacing:.04em;}
 .k3-row{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;}
 .k3-col{text-align:center;flex:1;}
 .k3-v{font-size:15px;font-weight:500;font-family:'Syne',sans-serif;letter-spacing:-.02em;}
-.k3-lb{font-size:9px;color:var(--t3);margin-top:2px;font-variant-numeric:tabular-nums;}
+.k3-lb{font-size:9px;color:var(--t2);margin-top:2px;font-variant-numeric:tabular-nums;}
 .k3-div{width:1px;background:var(--border);height:28px;flex-shrink:0;}
 .dlt{font-size:10px;margin-top:3px;font-variant-numeric:tabular-nums;}
-.up{color:var(--up);}.dn{color:var(--dn);}.fl{color:var(--t3);}
+.up{color:var(--up);}.dn{color:var(--dn);}.fl{color:var(--t2);}
 
 /* ── FORMAT PILLS ── */
 .fmt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem;}
@@ -107,20 +107,20 @@ header{
   background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
   padding:.75rem .85rem;text-align:center;
 }
-.fmt-n{font-size:10px;color:var(--t2);margin-bottom:5px;letter-spacing:.03em;}
+.fmt-n{font-size:10px;color:var(--text);margin-bottom:5px;letter-spacing:.03em;}
 .fmt-v{font-size:20px;font-weight:600;font-family:'Syne',sans-serif;letter-spacing:-.03em;}
-.fmt-s{font-size:10px;color:var(--t3);margin-top:3px;}
+.fmt-s{font-size:10px;color:var(--t2);margin-top:3px;}
 
 /* ── CATEGORY TABLE ── */
 .cat-table{width:100%;border-collapse:collapse;}
-.cat-table th{font-size:10px;color:var(--t2);font-weight:400;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--border);}
+.cat-table th{font-size:10px;color:var(--text);font-weight:400;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--border);}
 .cat-table th:not(:first-child){text-align:right;}
 .cat-table td{font-size:12px;padding:.55rem .75rem;border-bottom:1px solid var(--border);color:var(--text);}
-.cat-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;color:var(--t2);}
+.cat-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;color:var(--text);}
 .cat-table tr:last-child td{border-bottom:none;}
 .cat-table tr:hover td{background:rgba(255,255,255,.02);}
 .cat-bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px;}
-.t-min{font-size:10px;color:var(--t2);font-weight:500;}
+.t-min{font-size:10px;color:var(--text);font-weight:500;}
 
 /* ── TOP LIST ── */
 .top-list{list-style:none;}
@@ -129,24 +129,24 @@ header{
   gap:8px;padding:.55rem 0;border-bottom:1px solid var(--border);
 }
 .top-list li:last-child{border-bottom:none;}
-.top-n{font-size:10px;color:var(--t3);font-variant-numeric:tabular-nums;font-family:'Inter',sans-serif;}
+.top-n{font-size:10px;color:var(--t2);font-variant-numeric:tabular-nums;font-family:'Inter',sans-serif;}
 .top-title{font-size:12px;}
-.top-hrs{font-size:11px;color:var(--t2);white-space:nowrap;font-variant-numeric:tabular-nums;}
-.top-pct{font-size:10px;color:var(--t3);margin-left:4px;}
+.top-hrs{font-size:11px;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.top-pct{font-size:10px;color:var(--t2);margin-left:4px;}
 
 /* ── USER TYPES ── */
 .user-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 .user-pill{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;}
-.user-lbl{font-size:10px;color:var(--t2);margin-bottom:6px;letter-spacing:.04em;}
+.user-lbl{font-size:10px;color:var(--text);margin-bottom:6px;letter-spacing:.04em;}
 .user-v{font-size:26px;font-weight:600;font-family:'Syne',sans-serif;letter-spacing:-.03em;}
-.user-s{font-size:10px;color:var(--t3);margin-top:4px;}
+.user-s{font-size:10px;color:var(--t2);margin-top:4px;}
 
 /* ── TABS ── */
 .tabs{display:flex;gap:6px;margin-bottom:.9rem;flex-wrap:wrap;}
 .tab{
   background:transparent;border:1px solid var(--border);
   border-radius:6px;padding:5px 13px;font-size:11px;
-  cursor:pointer;color:var(--t2);font-family:'Inter',sans-serif;
+  cursor:pointer;color:var(--text);font-family:'Inter',sans-serif;
   transition:all .15s;
 }
 .tab:hover{border-color:var(--blue);color:var(--blue);}
@@ -154,9 +154,9 @@ header{
 
 /* ── ENGAGEMENT TABLE ── */
 .eng-table{width:100%;border-collapse:collapse;}
-.eng-table th{font-size:10px;color:var(--t2);font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:.5rem .75rem;border-bottom:1px solid var(--border);text-align:right;}
+.eng-table th{font-size:10px;color:var(--text);font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:.5rem .75rem;border-bottom:1px solid var(--border);text-align:right;}
 .eng-table th:first-child{text-align:left;}
-.eng-table td{font-size:12px;padding:.55rem .75rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;color:var(--t2);}
+.eng-table td{font-size:12px;padding:.55rem .75rem;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums;color:var(--text);}
 .eng-table td:first-child{text-align:left;color:var(--text);}
 .eng-table tr:last-child td{border-bottom:none;}
 .eng-table tr:hover td{background:rgba(255,255,255,.02);}
@@ -170,12 +170,12 @@ header{
 .it{font-weight:600;margin-right:4px;}
 
 /* ── LEGEND ── */
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;font-size:11px;color:var(--t2);}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;font-size:11px;color:var(--text);}
 .legend span{display:flex;align-items:center;gap:5px;}
 .sw{width:8px;height:8px;border-radius:2px;display:inline-block;flex-shrink:0;}
 
 /* ── NOTE ── */
-.note{font-size:10px;color:var(--t3);margin-top:.5rem;line-height:1.5;}
+.note{font-size:10px;color:var(--t2);margin-top:.5rem;line-height:1.5;}
 
 /* ── GRID ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
@@ -186,7 +186,7 @@ header{
 .ch{position:relative;width:100%;}
 
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;font-size:11px;color:var(--t3);letter-spacing:.04em;}
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;font-size:11px;color:var(--t2);letter-spacing:.04em;}
 </style>
 </head>
 <body>
@@ -225,7 +225,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
 <div class="user-grid" style="margin-bottom:1rem;">
   <div class="user-pill">
     <div class="user-lbl">Anónimos</div>
-    <div class="user-v" style="color:var(--t2)">69.0%</div>
+    <div class="user-v" style="color:var(--text)">69.0%</div>
     <div class="user-s">1,156,365 UU acumulados</div>
   </div>
   <div class="user-pill">
@@ -254,7 +254,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
   <div class="fmt-pill"><div class="fmt-n">Episodio</div><div class="fmt-v" style="color:var(--violet)">38.0%</div><div class="fmt-s">2.32M VV</div></div>
   <div class="fmt-pill"><div class="fmt-n">Lineal</div><div class="fmt-v" style="color:var(--amber)">5.9%</div><div class="fmt-s">360K VV</div></div>
   <div class="fmt-pill"><div class="fmt-n">VOD 7D</div><div class="fmt-v" style="color:var(--rose)">0.8%</div><div class="fmt-s">50K VV</div></div>
-  <div class="fmt-pill"><div class="fmt-n">Clip</div><div class="fmt-v" style="color:var(--t2)">0.5%</div><div class="fmt-s">30K VV</div></div>
+  <div class="fmt-pill"><div class="fmt-n">Clip</div><div class="fmt-v" style="color:var(--text)">0.5%</div><div class="fmt-s">30K VV</div></div>
 </div>
 
 <div class="g2">
@@ -304,8 +304,8 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
         <tr><td><span class="cat-bar" style="width:30px;background:var(--teal)"></span>Noticias</td><td>1.06M</td><td>17.4%</td><td>293K h</td><td class="t-min">3h 31'</td></tr>
         <tr><td><span class="cat-bar" style="width:23px;background:var(--amber)"></span>Telenovelas</td><td>817K</td><td>13.4%</td><td>396K h</td><td class="t-min" style="color:var(--amber);font-weight:600;">17h 46'</td></tr>
         <tr><td><span class="cat-bar" style="width:4px;background:var(--rose)"></span>Cine</td><td>131K</td><td>2.1%</td><td>91K h</td><td class="t-min">2h 35'</td></tr>
-        <tr><td><span class="cat-bar" style="width:2px;background:var(--t3)"></span>Infantil</td><td>52K</td><td>0.9%</td><td>11K h</td><td class="t-min">1h 10'</td></tr>
-        <tr><td><span class="cat-bar" style="width:2px;background:var(--t3)"></span>Docs.</td><td>5.5K</td><td>0.1%</td><td>2.2K h</td><td class="t-min">0h 48'</td></tr>
+        <tr><td><span class="cat-bar" style="width:2px;background:var(--t2)"></span>Infantil</td><td>52K</td><td>0.9%</td><td>11K h</td><td class="t-min">1h 10'</td></tr>
+        <tr><td><span class="cat-bar" style="width:2px;background:var(--t2)"></span>Docs.</td><td>5.5K</td><td>0.1%</td><td>2.2K h</td><td class="t-min">0h 48'</td></tr>
       </tbody>
     </table>
   </div>
@@ -322,7 +322,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
 
 <div class="g2">
   <div class="card">
-    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📺 Directo <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">1.50M h · 164 programas</span></div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📺 Directo <span style="font-size:10px;color:var(--text);font-weight:400;margin-left:6px;">1.50M h · 164 programas</span></div>
     <ul class="top-list">
       <li><span class="top-n">01</span><span class="top-title">Espejo Público</span><span><span class="top-hrs">82.042 h</span><span class="top-pct">5.8%</span></span></li>
       <li><span class="top-n">02</span><span class="top-title">La Ruleta de la Suerte</span><span><span class="top-hrs">79.802 h</span><span class="top-pct">5.7%</span></span></li>
@@ -332,7 +332,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
     </ul>
   </div>
   <div class="card">
-    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🎬 Episodio <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">1.17M h · 1.222 títulos</span></div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🎬 Episodio <span style="font-size:10px;color:var(--text);font-weight:400;margin-left:6px;">1.17M h · 1.222 títulos</span></div>
     <ul class="top-list">
       <li><span class="top-n">01</span><span class="top-title">Sueños de libertad</span><span><span class="top-hrs">185.261 h</span><span class="top-pct">15.8%</span></span></li>
       <li><span class="top-n">02</span><span class="top-title">En tierra lejana</span><span><span class="top-hrs">114.311 h</span><span class="top-pct">9.8%</span></span></li>
@@ -345,7 +345,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
 
 <div class="g2" style="margin-top:1rem;">
   <div class="card">
-    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📡 Lineal <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">288K h · 265 títulos</span></div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">📡 Lineal <span style="font-size:10px;color:var(--text);font-weight:400;margin-left:6px;">288K h · 265 títulos</span></div>
     <ul class="top-list">
       <li><span class="top-n">01</span><span class="top-title">Aquí no hay quien viva</span><span><span class="top-hrs">138.928 h</span><span class="top-pct">48.2%</span></span></li>
       <li><span class="top-n">02</span><span class="top-title">Equipo de Investigación</span><span><span class="top-hrs">52.366 h</span><span class="top-pct">18.2%</span></span></li>
@@ -355,7 +355,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
     </ul>
   </div>
   <div class="card">
-    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🕐 VOD 7 días <span style="font-size:10px;color:var(--t2);font-weight:400;margin-left:6px;">19.7K h · 184 títulos</span></div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;color:var(--text);">🕐 VOD 7 días <span style="font-size:10px;color:var(--text);font-weight:400;margin-left:6px;">19.7K h · 184 títulos</span></div>
     <ul class="top-list">
       <li><span class="top-n">01</span><span class="top-title">The Big Bang Theory</span><span><span class="top-hrs">1.809 h</span><span class="top-pct">9.2%</span></span></li>
       <li><span class="top-n">02</span><span class="top-title">En tierra lejana</span><span><span class="top-hrs">1.468 h</span><span class="top-pct">7.4%</span></span></li>
@@ -430,7 +430,7 @@ footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;
 <footer>Atresplayer · Market Intelligence · Adobe Analytics + Hiperdistribución · Mayo 2024 – Mayo 2026</footer>
 
 <script>
-const TC={color:'#3a3f4a',font:{size:10,family:'Inter, sans-serif'}};
+const TC={color:'#a0a5b0',font:{size:10,family:'Inter, sans-serif'}};
 const GC={color:'rgba(255,255,255,0.04)'};
 const TCR={...TC,maxRotation:45,autoSkip:false};
 const IS=[16,20];
